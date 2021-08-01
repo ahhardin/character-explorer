@@ -111,6 +111,7 @@ export default {
     this.fetchCharacters()
   },
   watch: {
+    // automatically search when keyword entered with a 500 ms debounce
     query: debounce(function() {
       this.fetchCharacters()
     }, 500),
@@ -126,6 +127,7 @@ export default {
         console.error(err)
         return {}
       })
+      // if response has a results array, unpack and format data
       if (characters && characters.results) {
         // unpack data and organize for use
         this.characters = characters.results.map(c => {
@@ -136,6 +138,7 @@ export default {
         this.prevUrl = characters.info.prev
         this.pages = characters.info.pages
         this.page = 1
+        // if no results, set data accordingly 
       } else {
         this.characters = []
         this.page = 0
@@ -145,18 +148,21 @@ export default {
       }
     },
     selectCharacter: function(character) {
+      // select a character to show the detail page, always scroll to the top
       this.selectedCharacter = character
       window.scroll(0, 0)
     },
     fetchCharacter: async function(r) {
-        const character = await fetch(r)
-            .then(res => {
-                if (!res.ok) throw res
-                return res.json()
-            }).catch(err => console.error(err))
-        return this.formatCharacter(character)
+      // fetch a single character
+      const character = await fetch(r)
+        .then(res => {
+            if (!res.ok) throw res
+            return res.json()
+        }).catch(err => console.error(err))
+      return this.formatCharacter(character)
     },
     formatCharacter: function(character) {
+      // save character data in the format needed
       let characterData = {}
       characterData.id = character.id
       characterData.name = character.name
@@ -167,11 +173,10 @@ export default {
       characterData.gender = character.gender
       characterData.status = character.status
       characterData.episodeCount = character.episode && character.episode.length
-      // keep raw data just in case we need it
-      characterData.raw = character
       return characterData
     },
     fetchPage: async function(url, type) {
+      // fetch next or previous page
       const characters = await fetch(url)
         .then(res => {
           if (!res.ok) throw res
@@ -183,6 +188,7 @@ export default {
         this.prevUrl = characters.info.prev
         window.scroll(0, 0)
       }
+      // increment or decrement page number depending on if this is a "next" or "prev" type request
       if (type == 'next') {
         this.page += 1
       } else if (type == 'prev') {

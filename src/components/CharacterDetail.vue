@@ -48,6 +48,7 @@ export default {
     }
   },
   created: function() {
+    // on load, fetch all the nearby characters
     this.fetchNearbyCharacters()
   },
   methods: {
@@ -59,6 +60,7 @@ export default {
           return res.json()
         }).catch(err => console.error(err))
       if (location && location.residents) {
+        // limit to 10 nearby characters, and filter out the character whose page we're on
         const nearbyCharacters = await Promise.all(location.residents.slice(0,10).map(async r => {
           return await this.fetchCharacter(r)
         }))
