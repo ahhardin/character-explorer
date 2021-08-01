@@ -7,8 +7,8 @@
         </div>
         <div class="card-stacked">
           <div class="card-content">
-            <h3>{{ character.name }}</h3>
-            <h4 style="color: darkgrey">{{ character.location }}</h4>
+            <h5 style="font-weight: bold">{{ character.name }}</h5>
+            <h6 style="color: darkgrey">{{ character.location }}</h6>
           </div>
         </div>
       </div>

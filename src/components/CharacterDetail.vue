@@ -1,18 +1,18 @@
 <template>
-  <div class="row">
-    <div class="col s12 m7">
+  <div class="enter-align row">
+    <div class="col s12">
       <div class="card">
         <div class="card-image">
           <img :src="character.image">
         </div>
         <div class="card-content">
-          <h3>{{ character.name }}</h3>
+          <h4 style="font-weight: bold">{{ character.name }}</h4>
           <div v-for="attr in displayAttributes" :key="attr.name">
             <div>
-              <h4>{{ attr.name }}</h4>
+              <h5>{{ attr.name }}</h5>
             </div>
             <div>
-              <h5 style="color: darkgrey">{{ character[attr.value] }}</h5>
+              <h6 style="color: darkgrey">{{ character[attr.value] }}</h6>
             </div>
           </div>
         </div>

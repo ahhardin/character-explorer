@@ -12,7 +12,7 @@
       />
     </div>
     <div v-else>
-      <h1 class="center-align">Character Explorer</h1>
+      <h1 style="font-weight: lighter;" class="center-align">Character Explorer</h1>
       <div class="row center-align">
         <form class="col s12">
           <div class="row">
